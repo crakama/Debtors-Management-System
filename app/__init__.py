@@ -7,8 +7,16 @@ from flask_sqlalchemy import SQLAlchemy
 # local imports
 from config import app_config
 
+from flask_login import LoginManager
+
+from flask_migrate import Migrate
+
 # db variable initialization
 db = SQLAlchemy()
+
+# LoginManager object initializing
+login_manager = LoginManager()
+
 
 #load configations based on the given config_name
 def create_app(config_name):
@@ -17,9 +25,12 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-        # temporary route
-    @app.route('/')
-    def hello_world():
-        return 'Hello, World!'
+    login_manager.init_app(app)
+    login_manager.login_message = "You must be logged in to access this page."
+    login_manager.login_view = "auth.login"
+
+    migrate = Migrate(app, db)
+
+    from app import models
 
     return app
