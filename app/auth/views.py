@@ -16,14 +16,14 @@ def register():
     """
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data,
+        remotuser = RemoteUser(email=form.email.data,
                             username=form.username.data,
                             first_name=form.first_name.data,
                             last_name=form.last_name.data,
                             password=form.password.data)
 
         # add user to the database
-        db.session.add(user)
+        db.session.add(remotuser)
         db.session.commit()
         flash('You have successfully registered! You may now login.')
 
@@ -44,14 +44,14 @@ def login():
 
         # check whether user exists in the database and whether
         # the password entered matches the password in the database
-        user = seUr.query.filter_by(email=form.email.data).first()
-        if user is not None and user.verify_password(
+        remotuser = RemoteUser.query.filter_by(email=form.email.data).first()
+        if remotuser is not None and remotuser.verify_password(
                 form.password.data):
             # log employee in
-            login_user(user)
+            login_user(remotuser)
 
             # redirect to the dashboard page after login
-            return redirect(url_for('home.dashboard'))
+            return redirect(url_for('home.deptdashboard'))
 
         # when login details are incorrect
         else:

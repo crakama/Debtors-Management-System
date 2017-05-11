@@ -14,15 +14,15 @@ a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
   /*color: #0d47a1;*/
   /*color: #ffffff;*/
   color: #31708f;
+  border-color: #e7e7e7;
+  background-color: #31708f;
 
 }
-div.navbar-header{
-  background-color: #4f7386;
 
-}
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
   color: #687430;
+  background-color: #4f7386;
 }
 
 footer {
@@ -83,21 +83,24 @@ p.copyright {
     height: 100%;
 }
 
-.intro-message {
+.intro-message > h2 {
     position: relative;
     padding-top: 20%;
     padding-bottom: 20%;
-}
-
-.intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
 }
 
-.intro-message > h3 {
+/*.intro-message > h2 {
+    margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-}
+    font-size: 5em;
+}*/
+
+/*.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}*/
 
 .lead {
     font-size: 18px;
