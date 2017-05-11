@@ -6,10 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 # local imports
 from config import app_config
-
 from flask_login import LoginManager
-
 from flask_migrate import Migrate
+from flask_bootstrap import Bootstrap
+
 
 # db variable initialization
 db = SQLAlchemy()
@@ -18,11 +18,12 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 
-#load configations based on the given config_name
+# load configations based on the given config_name
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
+    Bootstrap(app)
     db.init_app(app)
 
     login_manager.init_app(app)
@@ -31,6 +32,19 @@ def create_app(config_name):
 
     migrate = Migrate(app, db)
 
+
     from app import models
+
+    # Import and Register all blueprints
+
+    # Accessible on browser using prefix, /admin
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
+
+    from .home import home as home_blueprint
+    app.register_blueprint(home_blueprint)
 
     return app
