@@ -4,9 +4,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DeptorForm, RoleForm
+from forms import DeptorForm, RemoteUserAssignForm, RoleForm
 from .. import db
-from ..models import Deptor, Role
+from ..models import Deptor, RemoteUser, Role
 
 def check_admin():
     """
@@ -204,3 +204,45 @@ def delete_role(id):
     return redirect(url_for('admin.list_roles'))
 
     return render_template(title="Delete Role")
+
+# ##########################  Employee Views ###################################
+
+@admin.route('/remoteusers')
+@login_required
+def list_remoteusers():
+    """
+    List all remoteusers
+    """
+    check_admin()
+
+    remoteusers = RemoteUser.query.all()
+    return render_template('admin/remoteusers/listrm_users.html',
+                           remoteusers=remoteusers, title='Remoteusers')
+
+@admin.route('/remoteusers/assign/<int:id>', methods=['GET', 'POST'])
+@login_required
+def assign_remoteuser(id):
+    """
+    Assign a role to a remoteuser
+    """
+    check_admin()
+
+    remoteuser = RemoteUser.query.get_or_404(id)
+
+    # prevent admin from being assigned a department or role
+    if remoteuser.is_admin:
+        abort(403)
+
+    form = RemoteUserAssignForm(obj=remoteuser)
+    if form.validate_on_submit():
+        remoteuser.role = form.role.data
+        db.session.add(remoteuser)
+        db.session.commit()
+        flash('You have successfully assigned a department and role.')
+
+        # redirect to the roles page
+        return redirect(url_for('admin.list_remoteusers'))
+
+    return render_template('admin/remoteusers/addeditrm_users.html',
+                           remoteuser=remoteuser, form=form,
+                           title='Assign A RemoteUser')
