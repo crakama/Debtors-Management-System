@@ -11,16 +11,16 @@ body, h1, h2, h3 {
 }
 
 a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-  /*color: #0d47a1;*/
-  /*color: #ffffff;*/
+
   color: #e7e7e7;
   border-color: #e7e7e7;
   background-color: #31708f;
+
 }
 
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
-  color: #e7e7e7;
+  color: #687430;
   background-color: #4f7386;
 }
 

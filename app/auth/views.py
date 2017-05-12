@@ -50,8 +50,11 @@ def login():
             # log employee in
             login_user(remotuser)
 
-            # redirect to the dashboard page after login
-            return redirect(url_for('home.deptdashboard'))
+            # redirect to the appropriate dashboard page after login
+            if remotuser.is_admin:
+                return redirect(url_for('home.admin_dashboard'))
+            else:
+                return redirect(url_for('home.deptdashboard'))
 
         # when login details are incorrect
         else:

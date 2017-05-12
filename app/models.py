@@ -52,24 +52,24 @@ def load_user(user_id):
 
 
 
-# class Deptor(db.Model):
-#     """
-#     Create a Deptor table
-#     """
-#
-#     __tablename__ = 'deptors'
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     fullnames = db.Column(db.String(100), unique=True)
-#     organization = db.Column(db.String(60))
-#     mobilenumber = db.Column(db.Integer, index=True, unique=True)
-#     nationalid = db.Column(db.Integer,index=True, unique=True)
-#     description = db.Column(db.String(200))
-#     remoteusers = db.relationship('RemoteUser', backref='deptors',
-#                                 lazy='dynamic')
-#
-#     def __repr__(self):
-#         return '<Deptor: {}>'.format(self.fullnames)
+class Deptor(db.Model):
+    """
+    Create a Deptor table
+    """
+
+    __tablename__ = 'deptors'
+
+    id = db.Column(db.Integer, primary_key=True)
+    fullnames = db.Column(db.String(100), unique=True)
+    mobilenumber = db.Column(db.Integer, index=True, unique=True)
+    nationalid = db.Column(db.Integer,index=True, unique=True)
+    deptamount = db.Column(db.Integer, index=True)
+    description = db.Column(db.String(200))
+    # remoteusers = db.relationship('RemoteUser', backref='deptors',
+    #                             lazy='dynamic')
+
+    def __repr__(self):
+        return '<Deptor: {}>'.format(self.fullnames)
 
 
 class Role(db.Model):
