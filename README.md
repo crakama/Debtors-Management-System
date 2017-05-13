@@ -1,6 +1,6 @@
 # DebtRemoteReference
 
-####Settings####
+**Settings:**
 
 Set up:
 *1. Development environment - necessary packages and modules for flask web app*
@@ -11,4 +11,4 @@ Set up:
 
 *4. Create models and configure SQLAlchemy Migrations*
 
-*5. Create **Forms* and **Views** 
+*5. Create **Forms** and **Views**
