@@ -1,5 +1,6 @@
 # app/__init__.py
 
+import os
 # third-party imports
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -20,9 +21,17 @@ login_manager = LoginManager()
 
 # load configations based on the given config_name
 def create_app(config_name):
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_config[config_name])
-    app.config.from_pyfile('config.py')
+    if os.getenv('FLASK_CONFIG') == "production":
+        app = Flask(__name__)
+        app.config.update(
+            SECRET_KEY=os.getenv('SECRET_KEY'),
+            SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI')
+        )
+    else:
+        app = Flask(__name__, instance_relative_config=True)
+        app.config.from_object(app_config[config_name])
+        app.config.from_pyfile('config.py')
+
     app.static_folder = 'static'
     Bootstrap(app)
     db.init_app(app)
