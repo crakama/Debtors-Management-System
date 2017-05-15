@@ -4,6 +4,7 @@ from flask import abort, render_template
 from flask_login import current_user, login_required
 
 from . import home
+from ..models import Deptor
 
 # Each view handles requests to the specified URL
 
@@ -24,13 +25,26 @@ def homepage():
     """
     return render_template('home/index.html', title="Welcome")
 
-@home.route('/deptdashboard')
+@home.route('/deptdashboard', methods=['GET', 'POST'])
 @login_required
 def deptdashboard():
     """
-    Render the deptdashboard template on the /deptdashboard route
+    List all deptors
     """
-    return render_template('home/deptdashboard.html', title="DeptDashboard")
+
+    deptors = Deptor.query.all()
+
+    return render_template('admin/deptors/listdeptors.html',
+                           deptors=deptors, title="Deptors")
+
+
+# @home.route('/deptdashboard')
+# @login_required
+# def deptdashboard():
+#     """
+#     Render the deptdashboard template on the /deptdashboard route
+#     """
+#     return render_template('admin/deptors/listdeptors.html', title="DeptDashboard")
 
 @home.route('/deptreport')
 @login_required
