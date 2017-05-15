@@ -12,6 +12,8 @@ from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 
 
+from config import app_config
+
 # db variable initialization
 db = SQLAlchemy()
 
