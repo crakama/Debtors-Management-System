@@ -1,6 +1,45 @@
 # DebtRemoteReference
 
+**What the app was to do**
 
+    > **User Need 1:​** Look Up Customer Debt Information by National ID or Mobile
+       Number
+      **Resolution:**​ The app will allow search by either national ID or mobile number
+      the input should be validated and if a customer is found the details displayed if not
+      an explanation that the customer is not found.
+
+    > **User Need 2:**​ Download Debtors
+      **Resolution:​** The app will allow the viewing on a dynamic table on the front
+      end that is searchable via javascript by any of the fields in the table. The
+      same table can also be downloaded as Excel.
+
+    > **User Need 3:​** User Roles
+      Resolution:​ The app will have two user roles - roleA and roleB - the first can
+      perform User Need 1 only, and the latter User Need 1 & 2.
+
+**What id does so far**
+
+Allows remote users to:
+                  - register, login
+                  - view list of deptors.
+Allows admins to:
+                  - Create remote users
+                  - Create roles and assign them to remote users
+                  - Create new debtors
+                  - View  and download list of new debtors
+
+>Disclaimer: THe app was supposed to use *roles* created by *admins* to *enable* or *disable* the download
+button. What it does now is, when a list of debtors is accessed the button disappears when remote users login and appears when admins login in.
+
+
+Live app is published on pythonanywhere and can be accessed on this link
+
+Register and login as remote user
+Use the following credentials to access admin module:
+
+  **Email:** *grshoe@admin.com*
+  **Username:** *grshoeadmin*
+  **password:** *grshoeadmin2017*
 
 Deployment Set Up (Ubuntu 161.0)
 ===============================
@@ -39,7 +78,7 @@ Deployment Set Up (Ubuntu 161.0)
 
 Use this command to copy this project to your local directory ` git clone https://github.com/crakama/DebtRemoteReference.git`
 
-Navigate to project's **root** directory, which is **remoterefapp** and issue `pip install -r requirements.txt`
+With you virtual environment activated,navigate to project's **root** directory, which is **remoterefapp** and issue `pip install -r requirements.txt`
 to install project's dependencies.
 
 #### Configure Database
@@ -90,6 +129,20 @@ to create the file and add the following content:
 ```
 * Enable the virtual host with the following command `sudo a2ensite remoterefapp`
 
+> Make sure you have your virtual environment activated and all dependencies from
+**requirements.txt** installed.
+
+* Migrate your Database. With your virtual environment active, navigate to the project directory
+and issue the following commands.
+```export FLASK_CONFIG=production
+   export FLASK_APP=run.py
+   export SQLALCHEMY_DATABASE_URI='mysql://your-username:your-password@your-host-address/your-database-name'
+   flask db upgrade
+```
+>If you happen to encounter *import error* such as *No module found* know that your dependencies
+did not install successfully. You will have to use **requirements.txt** file to install missing dependencies one by one.
+
+
 #### Create the .wsgi File
 
 Move to the **root** directory and create a file named `flaskapp.wsgi` with following commands:
@@ -112,3 +165,16 @@ Move to the **root** directory and create a file named `flaskapp.wsgi` with foll
 
 * Restart Apache with the following command to apply the changes:
 `sudo service apache2 restart`
+
+####Run the web app on your virtual Host
+
+* You can register as new user and login
+* Admin module will not be available unless you create a new user at the terminal as shown below
+```$ flask shell
+    >>> from app.models import RemoteUser
+    >>> from app import db
+    >>> gr_admin = RemoteUser(email="gradmin@admin.com",username="gradmin",password="gradmin2017",is_admin=True)
+    >>> db.session.add(admin)
+    >>> db.session.commit()
+```
+* login as an admin user and add roles, and assign them to remote users.
