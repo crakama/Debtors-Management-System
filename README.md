@@ -34,7 +34,7 @@
 button. What it does now is, when a list of debtors is accessed the button disappears when remote users login and appears when admins login in.
 
 
-Live app is published on pythonanywhere and can be accessed on this[link](http://deptrefapp.pythonanywhere.com/)
+Live app is published on pythonanywhere and can be accessed on this [ http://deptrefapp.pythonanywhere.com/](http://deptrefapp.pythonanywhere.com/)
 
 Register and login as remote user
 Use the following credentials to access admin module:
