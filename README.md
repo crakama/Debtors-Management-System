@@ -19,11 +19,11 @@
 
 **What id does so far**
 
-######Allows remote users to:
+Allows remote users to:
 
                   - register, login
                   - view list of deptors.
-######Allows admins to:
+Allows admins to:
 
                   - Create remote users
                   - Create roles and assign them to remote users
