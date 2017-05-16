@@ -2,18 +2,18 @@
 
 **What the app was to do**
 
-    > **User Need 1:​** Look Up Customer Debt Information by National ID or Mobile
+    > User Need 1:​ Look Up Customer Debt Information by National ID or Mobile
        Number
-      **Resolution:**​ The app will allow search by either national ID or mobile number
+      Resolution:The app will allow search by either national ID or mobile number
       the input should be validated and if a customer is found the details displayed if not
       an explanation that the customer is not found.
 
-    > **User Need 2:**​ Download Debtors
-      **Resolution:​** The app will allow the viewing on a dynamic table on the front
+    > User Need 2:Download Debtors
+      Resolution:​ The app will allow the viewing on a dynamic table on the front
       end that is searchable via javascript by any of the fields in the table. The
       same table can also be downloaded as Excel.
 
-    > **User Need 3:​** User Roles
+    > User Need 3:​User Roles
       Resolution:​ The app will have two user roles - roleA and roleB - the first can
       perform User Need 1 only, and the latter User Need 1 & 2.
 
