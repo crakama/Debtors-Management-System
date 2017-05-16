@@ -19,11 +19,11 @@
 
 **What id does so far**
 
-Allows remote users to:
+###### Allows remote users to:
 
                   - register, login
                   - view list of deptors.
-Allows admins to:
+###### Allows admins to:
 
                   - Create remote users
                   - Create roles and assign them to remote users
@@ -34,7 +34,7 @@ Allows admins to:
 button. What it does now is, when a list of debtors is accessed the button disappears when remote users login and appears when admins login in.
 
 
-Live app is published on pythonanywhere and can be accessed on this link
+Live app is published on pythonanywhere and can be accessed on this[link](http://deptrefapp.pythonanywhere.com/)
 
 Register and login as remote user
 Use the following credentials to access admin module:
@@ -179,4 +179,4 @@ Move to the **root** directory and create a file named `flaskapp.wsgi` with foll
     >>> db.session.add(admin)
     >>> db.session.commit()
 ```
-* login as an admin user and add roles, and assign them to remote users.
+* login as an admin user, add roles and assign them to remote users, Add debtors .
